@@ -1,0 +1,142 @@
+<h2>Add a Course</h2>
+
+
+<%# Bootstrap table start%>
+  <table class='table table-hover table-responsive table-bordered'>
+    <form id='add_course' action ='/addcourse' method='post'>
+
+      <tr>
+          <td>Provider Name</td>
+          <td><input type='text' name='provider' placeholder='Provider Name' class='form-control' required></td>
+      </tr>
+
+      <tr>
+          <td>Course Title</td>
+          <td><input type='text' name='title' placeholder='Course Title' class='form-control' required></td>
+      </tr>
+
+      <tr>
+          <td>Subject Area</td>
+          <td><select name='subjectarea' class='form-control' required>
+            <option value='Data Science'>Data Science</option>
+            <option value='Digital Marketing'>Digital Marketing</option>
+            <option value='Mobile App Development'>Mobile App Development</option>
+            <option value='Web Development'>Web Development</option>
+            <option value='UX and Design'>UX and Design</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Delivery Mode</td>
+          <td><select name='deliverymode' class='form-control' required>
+            <option value='Offline'>Offline</option>
+            <option value='Online'>Online</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Format</td>
+          <td><select name='format' class='form-control' required>
+            <option value='Full-time'>Full-time</option>
+            <option value='Part-time'>Part-time</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Length</td>
+          <td><input type='text' name='length' placeholder='Length of Course in Weeks' class='form-control' required></td>
+      </tr>
+
+      <tr>
+          <td>Experience Level</td>
+          <td><select name='experiencelevel' class='form-control' required>
+            <option value='Beginner'>Beginner</option>
+            <option value='Intermediate (pre-requisites required)'>Intermediate (pre-requisites required)</option>
+            <option value='Advanced (pre-requisites required)'>Advanced (pre-requisites required)</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Cost</td>
+          <td><input type='text' name='price' placeholder='Cost of Course' class='form-control' required></td>
+      </tr>
+
+      <tr>
+          <td>Subsidy Availability</td>
+          <td><select name='subsidyavailability' class='form-control' required>
+            <option value='Yes'>Yes</option>
+            <option value='No'>No</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Subsidies</td>
+          <td><input type='text' name='subsidies' placeholder='Subsidies' class='form-control'></td>
+      </tr>
+
+      <tr>
+          <td>Intakes</td>
+          <td><input type='text' name='intakes' placeholder='Subsidies' class='form-control'></td>
+      </tr>
+
+      <tr>
+          <td>Some Topics</td>
+          <td><input type='text' name='sometopics' placeholder='Subsidies' class='form-control'></td>
+      </tr>
+
+      <tr>
+             <td></td>
+             <td>
+               <button type="submit" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-plus"></span> Create New Record
+              </button>
+             </td>
+         </tr>
+</form>
+  </table>
+<%# Bootstrap table end%>
+
+<%# table to show added courses%>
+  <table class='table table-hover table-responsive table-bordered'>
+      <td>Provider Name</td>
+      <td>Course Title</td>
+      <td>Subject Area</td>
+      <td>Delivery Mode</td>
+      <td>Format</td>
+      <td>Length</td>
+      <td>Experience Level</td>
+      <td>Cost</td>
+      <td>Subsidy Availability</td>
+      <td>Subsidies</td>
+      <td>Intakes</td>
+      <td>Some Topics</td>
+
+      <% course.forEach(function(course, index){ %>
+        <div class='course-container'>
+          <p>
+      <tr>
+      <td><%=course.provider%></td>
+      <td><%=course.title%></td>
+      <td><%=course.subjectarea%></td>
+      <td><%=course.deliverymode%></td>
+      <td><%=course.format%></td>
+      <td><%=course.length%></td>
+      <td><%=course.experiencelevel%></td>
+      <td><%=course.cost%></td>
+      <td><%=course.subsidyavailability%></td>
+      <td><%=course.subsidies%></td>
+      <td><%=course.intakes%></td>
+      <td><%=course.sometopics%></td>
+      </tr>
+
+      </p>
+      </div>
+
+      <% }) %>
+
+        </table>

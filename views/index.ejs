@@ -1,0 +1,58 @@
+<h2>Search Page</h2>
+<%# Bootstrap table start%>
+  <table class='table table-hover table-responsive table-bordered'>
+    <form id='search_course' action ='/' method='post'>
+
+      <tr>
+          <td>Subject Area</td>
+          <td><select name='subjectarea' class='form-control' required>
+            <option value='Data Science'>Data Science</option>
+            <option value='Digital Marketing'>Digital Marketing</option>
+            <option value='Mobile App Development'>Mobile App Development</option>
+            <option value='Web Development'>Web Development</option>
+            <option value='UX and Design'>UX and Design</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Format</td>
+          <td><select name='format' class='form-control'>
+            <option value='Full-time'>Full-time</option>
+            <option value='Part-time'>Part-time</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Delivery Mode</td>
+          <td><select name='deliverymode' class='form-control'>
+            <option value='Offline'>Offline</option>
+            <option value='Online'>Online</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+          <td>Experience Level</td>
+          <td><select name='experiencelevel' class='form-control'>
+            <option value='Beginner'>Beginner</option>
+            <option value='Intermediate (pre-requisites required)'>Intermediate (pre-requisites required)</option>
+            <option value='Advanced (pre-requisites required)'>Advanced (pre-requisites required)</option>
+        </select>
+          </td>
+      </tr>
+
+      <tr>
+             <td></td>
+             <td>
+               <button type="submit" class="btn btn-primary">
+                  <span class="glyphicon"></span> Search
+              </button>
+             </td>
+         </tr>
+
+
+    </form>
+      </table>
+    <%# Bootstrap table end%>

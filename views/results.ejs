@@ -1,0 +1,25 @@
+<h2>Results Page</h2>
+
+<%- JSON.stringify(course) %>
+
+<table class='table table-hover table-responsive table-bordered'>
+    <td>Provider Name</td>
+    <td>Course Title</td>
+    <td>Delivery Mode</td>
+    <td>Format</td>
+    <td>Length</td>
+    <td>Experience Level</td>
+    <td>Cost</td>
+    <td>Subsidies</td>
+
+  <tr>
+    <td><%- course[1].provider %></td>
+    <td><%- course[1].title %></td>
+    <td><%- course[1].deliverymode %></td>
+    <td><%- course[1].format %></td>
+    <td><%- course[1].length %></td>
+    <td><%- course[1].experiencelevel %></td>
+    <td><%- course[1].price %></td>
+    <td><%- course[1].subsidies %></td>
+  </tr>
+    </table>
