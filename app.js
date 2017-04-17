@@ -82,6 +82,10 @@ app.post('/', function(req, res){
     })
 })
 
+app.get('/test', function(req, res){
+ res.render('test.ejs')
+})
+
 // app.get('/', function(req, res){
 //   Course.find({ 'deliverymode': 'Online'}, function(err, course){
 //     if (err) console.log(err)
