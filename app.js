@@ -11,11 +11,17 @@ var app = express()
 var router = express.Router()
 var port = process.env.PORT || 4000
 var MongoClient = require('mongodb').MongoClient
+var passport = require('passport')
+var flash = require('connect-flash')
+var cookieParser = require('cookie-parser')
+var session = require('express-session')
 
 var dbURI = process.env.PROD_MONGODB || 'mongodb://localhost:27017/bootcampsearch'
 mongoose.connect(dbURI)
 
 var Course = require('./models/course')
+
+require('./config/passport')(passport);
 
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
@@ -32,7 +38,17 @@ app.use(expressLayouts)
 app.engine('ejs', require('ejs').renderFile)
 app.set('view engine', 'ejs')
 app.use(methodOverride('_method'))
+app.use(cookieParser())
 helpers(app)
+
+//required for passport
+app.use(session({ secret: 'ilovescotch' }))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+
+require('./routes/routes.js')(app, passport)
+require('./routes/adminroutes.js')(app, passport)
 
 mongoose.Promise = global.Promise
 
@@ -81,22 +97,6 @@ app.post('/', function(req, res){
       })
     })
 })
-
-app.get('/test', function(req, res){
- res.render('test.ejs')
-})
-
-// app.get('/', function(req, res){
-//   Course.find({ 'deliverymode': 'Online'}, function(err, course){
-//     if (err) console.log(err)
-//     allCourse = course;
-//     console.log('allCourse = ' + course)
-//     res.render('index.ejs', {
-//       course: allCourse
-//       })
-//     })
-// })
-
 
 app.listen(port, function () {
   console.log('app is running at ' + port)
