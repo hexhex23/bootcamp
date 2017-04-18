@@ -42,7 +42,7 @@ app.use(cookieParser())
 helpers(app)
 
 //required for passport
-app.use(session({ secret: 'ilovescotch' }))
+app.use(session({ secret: 'lovebirds' }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
@@ -84,6 +84,12 @@ app.get('/', function(req, res){
  course: ''})
 })
 
+app.get('/results', function(req, res){
+  res.render('results.ejs', {
+    course: allCourse
+    })
+})
+
 app.post('/', function(req, res){
   console.log(req.body)
   Course.find({
@@ -92,10 +98,20 @@ app.post('/', function(req, res){
     if (err) console.log(err)
     allCourse = course;
     console.log('allCourse = ' + course)
-    res.render('results.ejs', {
-      course: allCourse
-      })
+    res.redirect('/results')
     })
+})
+
+app.get('/individualresults', function(req, res){
+  res.render('individualresults.ejs')
+})
+
+app.get('/results/:course_id', function(req, res) {
+  Course.findById(req.params.course_id, function(err, course) {
+    if (err)
+      res.send(err)
+      res.json(course)
+  })
 })
 
 app.listen(port, function () {

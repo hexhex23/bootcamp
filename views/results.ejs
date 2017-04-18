@@ -1,29 +1,22 @@
 <h2>Results Page</h2>
 
-<table class='table table-hover table-responsive table-bordered'>
-    <td>Provider Name</td>
-    <td>Course Title</td>
-    <td>Delivery Mode</td>
-    <td>Format</td>
-    <td>Length</td>
-    <td>Experience Level</td>
-    <td>Cost</td>
-    <td>Subsidies</td>
-
-    </table>
-
-    <% course.forEach(function(course, index){ %>
-      <div class='course-container'>
-        <p>
-          Provider: <%=course.provider%><br>
-          Course: <%=course.title%><br>
-          Price: <%=course.price%><br>
-          Subsidies: <%=course.subsidies%><br>
-          Delivery Mode: <%=course.deliverymode%><br>
-          Availability: <%=course.intakes%><br>
-          Length: <%=course.length%><br>
-          Experience Level: <%=course.experiencelevel%><br>
-        </p>
-      </div>
-
-    <% }) %>
+      <% course.forEach(function(course, index){ %>
+    <table class='table table-responsive table-bordered'>
+      <tr>
+        <th rowspan="2"><h3><%=course.provider%></h3><br /><h4><%=course.title%></h4></th>
+        <td>Price: <br />SGD<%=course.price%></td>
+        <td>Subsidies: <br /><%=course.subsidies%></td>
+        <td>Format: <br /><%=course.format%></td>
+        <td rowspan="2">more details; favourite</td>
+      </tr>
+      <tr>
+        <td>Delivery Mode: <br /><%=course.deliverymode%></td>
+          <td>Length: <br /><%=course.length%></td>
+          <td>Experience Level: <br /><%=course.experiencelevel%></td>
+      </tr>
+  <tr>
+    <td colspan="2">Great for:</td>
+    <td colspan="3">Be aware:</td>
+  </tr>
+  </table>
+      <% }) %>
