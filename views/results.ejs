@@ -7,7 +7,10 @@
         <td>Price: <br />SGD<%=course.price%></td>
         <td>Subsidies: <br /><%=course.subsidies%></td>
         <td>Format: <br /><%=course.format%></td>
-        <td rowspan="2">more details; favourite</td>
+        <td rowspan="2"><form id='show_individualresults' action ='/results/:course_id' method='get'>
+              <input type="submit" value="More Details" />
+          </form>
+Favourite</td>
       </tr>
       <tr>
         <td>Delivery Mode: <br /><%=course.deliverymode%></td>
@@ -19,4 +22,5 @@
     <td colspan="3">Be aware:</td>
   </tr>
   </table>
+
       <% }) %>

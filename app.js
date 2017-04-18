@@ -54,7 +54,7 @@ mongoose.Promise = global.Promise
 
 var allCourse;
 
-app.get('/addcourse', function(req, res){
+app.get('/addcourse', isLoggedIn, function(req, res){
 
   Course.find({}, function(err, course){
     if (err) console.log(err);
@@ -111,8 +111,15 @@ app.get('/results/:course_id', function(req, res) {
     if (err)
       res.send(err)
       res.json(course)
+
   })
 })
+
+function isLoggedIn(req, res, next) {
+
+    if (req.isAuthenticated())
+        return next()
+    res.redirect('/admin/adauthhome')}
 
 app.listen(port, function () {
   console.log('app is running at ' + port)
