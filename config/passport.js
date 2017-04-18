@@ -4,25 +4,23 @@ var User = require('../models/user');
 var Admin = require('../models/admin');
 
 module.exports = function(passport) {
-    passport.serializeUser(function(user, done) {
+   passport.serializeUser(function(user, done){
         done(null, user.id);
-    })
+   })
 
-    passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            done(err, user);
+   passport.deserializeUser(function(id, done){
+    Admin.findById(id, function(err, user){
+      if(err) done(err);
+        if(user){
+          done(null, user);
+        } else {
+           User.findById(id, function(err, user){
+           if(err) done(err);
+           done(null, user);
         })
+      }
     })
-
-    passport.serializeUser(function(admin, done) {
-        done(null, admin.id);
-    })
-
-    passport.deserializeUser(function(id, done) {
-        Admin.findById(id, function(err, admin) {
-            done(err, admin);
-        })
-    })
+  })
 
     passport.use('local-signup', new LocalStrategy({
         usernameField : 'email',
