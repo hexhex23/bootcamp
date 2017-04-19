@@ -42,7 +42,7 @@ app.use(cookieParser())
 helpers(app)
 
 //required for passport
-app.use(session({ secret: 'lovebirds' }))
+app.use(session({ secret: 'michaelfassbender' }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
@@ -53,6 +53,19 @@ require('./routes/adminroutes.js')(app, passport)
 mongoose.Promise = global.Promise
 
 var allCourse;
+
+app.get('/viewall', isLoggedIn, function(req, res){
+
+  Course.find({}, function(err, course){
+    if (err) console.log(err);
+    allCourse = course;
+    console.log('allCourse = ' + course)
+    res.render('viewall.ejs', {
+      course: allCourse
+      })
+    })
+})
+
 
 app.get('/addcourse', isLoggedIn, function(req, res){
 
@@ -75,19 +88,20 @@ app.post('/addcourse', function(req, res) {
   course.save(function(err, course){
     if(err) console.log(err);
   })
-  res.redirect('/addcourse')
+  res.redirect('/viewall')
   })
 })
 
-app.get('/', function(req, res){
- res.render('index.ejs', {
- course: ''})
-})
 
 app.get('/results', function(req, res){
   res.render('results.ejs', {
     course: allCourse
     })
+})
+
+app.get('/', function(req, res){
+ res.render('index.ejs', {
+ course: ''})
 })
 
 app.post('/', function(req, res){
@@ -102,17 +116,47 @@ app.post('/', function(req, res){
     })
 })
 
-app.get('/individualresults', function(req, res){
-  res.render('individualresults.ejs')
+app.get('/results', function(req, res){
+  res.render('results.ejs', {
+    course: allCourse
+    })
 })
 
 app.get('/results/:course_id', function(req, res) {
   Course.findById(req.params.course_id, function(err, course) {
     if (err)
       res.send(err)
-      res.json(course)
-
+      res.render('individualresults.ejs', {
+        course: course
+        })
   })
+})
+
+app.get('/update/:course_id', function(req, res){
+Course.findById(req.params.course_id, function(err, course) {
+   if (err)
+     res.send(err)
+     res.render('update.ejs', {
+       course: course,
+       course_id: req.params.course_id
+       })
+ })
+ })
+
+app.put('/update/:course_id', function(req,res) {
+  Course.findOneAndUpdate({
+    _id: req.params.course_id
+  }, {$set: {title: req.body.title}},
+  {upsert: true},
+  function(err, newCourse) {
+    if(err) {
+      console.log(err)
+    } else {
+      console.log(newCourse)
+      res.redirect('/viewall')
+    }
+  }
+)
 })
 
 function isLoggedIn(req, res, next) {

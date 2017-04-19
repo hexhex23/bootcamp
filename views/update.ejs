@@ -1,6 +1,4 @@
-<h2>Add a Course</h2>
-  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-  <p></p>
+<h2>Update a Course</h2>
 
 <%# start header navigation bar%>
 <div class='page-wrapper'>
@@ -32,23 +30,68 @@
 </div>
 <%# End navigation bar%>
 
+  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+<div class="page-header text-center">
+    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+</div>
+
+<h3>This is the course you are updating:</h3>
+<table class='table table-hover table-responsive table-bordered'>
+    <td>Provider Name</td>
+    <td>Course Title</td>
+    <td>Subject Area</td>
+    <td>Delivery Mode</td>
+    <td>Format</td>
+    <td>Length</td>
+    <td>Experience Level</td>
+    <td>Cost</td>
+    <td>Subsidy Availability</td>
+    <td>Subsidies</td>
+    <td>Intakes</td>
+    <td>Some Topics</td>
+
+
+<div class='course-container'>
+  <p>
+<tr>
+<td><%=course.provider%></td>
+<td><%=course.title%></td>
+<td><%=course.subjectarea%></td>
+<td><%=course.deliverymode%></td>
+<td><%=course.format%></td>
+<td><%=course.length%></td>
+<td><%=course.experiencelevel%></td>
+<td><%=course.cost%></td>
+<td><%=course.subsidyavailability%></td>
+<td><%=course.subsidies%></td>
+<td><%=course.intakes%></td>
+<td><%=course.sometopics%></td>
+</tr>
+
+</p>
+</div>
+  </table>
+
 <%# Bootstrap table start%>
+<h3>Update the fields you would like to change.</h3>
   <table class='table table-hover table-responsive table-bordered'>
-    <form id='add_course' action ='/addcourse' method='post'>
+    <form id='edit_course' action =<%= '/update/' + course_id + '/?_method=PUT' %> method='post'>
+      <input type="hidden" name="_method" value="put"/>
 
       <tr>
           <td>Provider Name</td>
-          <td><input type='text' name='provider' placeholder='Provider Name' class='form-control' required></td>
+          <td><input type='text' name='provider' placeholder='Provider Name' class='form-control'></td>
       </tr>
 
       <tr>
           <td>Course Title</td>
-          <td><input type='text' name='title' placeholder='Course Title' class='form-control' required></td>
+          <td><input type='text' name='title' placeholder='Course Title' class='form-control'></td>
       </tr>
 
       <tr>
           <td>Subject Area</td>
-          <td><select name='subjectarea' class='form-control' required>
+          <td><select name='subjectarea' class='form-control'>
             <option value='Data Science'>Data Science</option>
             <option value='Digital Marketing'>Digital Marketing</option>
             <option value='Mobile App Development'>Mobile App Development</option>
@@ -60,7 +103,7 @@
 
       <tr>
           <td>Delivery Mode</td>
-          <td><select name='deliverymode' class='form-control' required>
+          <td><select name='deliverymode' class='form-control'>
             <option value='Offline'>Offline</option>
             <option value='Online'>Online</option>
         </select>
@@ -69,7 +112,7 @@
 
       <tr>
           <td>Format</td>
-          <td><select name='format' class='form-control' required>
+          <td><select name='format' class='form-control'>
             <option value='Full-time'>Full-time</option>
             <option value='Part-time'>Part-time</option>
         </select>
@@ -78,12 +121,12 @@
 
       <tr>
           <td>Length</td>
-          <td><input type='text' name='length' placeholder='Length of Course in Weeks' class='form-control' required></td>
+          <td><input type='text' name='length' placeholder='Length of Course in Weeks' class='form-control'></td>
       </tr>
 
       <tr>
           <td>Experience Level</td>
-          <td><select name='experiencelevel' class='form-control' required>
+          <td><select name='experiencelevel' class='form-control'>
             <option value='Beginner'>Beginner</option>
             <option value='Intermediate (pre-requisites required)'>Intermediate (pre-requisites required)</option>
             <option value='Advanced (pre-requisites required)'>Advanced (pre-requisites required)</option>
@@ -93,12 +136,12 @@
 
       <tr>
           <td>Cost</td>
-          <td><input type='text' name='price' placeholder='Cost of Course' class='form-control' required></td>
+          <td><input type='text' name='price' placeholder='Cost of Course' class='form-control'></td>
       </tr>
 
       <tr>
           <td>Subsidy Availability</td>
-          <td><select name='subsidyavailability' class='form-control' required>
+          <td><select name='subsidyavailability' class='form-control'>
             <option value='Yes'>Yes</option>
             <option value='No'>No</option>
         </select>
@@ -124,7 +167,7 @@
              <td></td>
              <td>
                <button type="submit" class="btn btn-primary">
-                  <span class="glyphicon glyphicon-plus"></span> Create New Record
+                  <span class="glyphicon"></span>Edit Record
               </button>
              </td>
          </tr>
