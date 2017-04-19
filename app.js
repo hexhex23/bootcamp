@@ -20,6 +20,7 @@ var dbURI = process.env.PROD_MONGODB || 'mongodb://localhost:27017/bootcampsearc
 mongoose.connect(dbURI)
 
 var Course = require('./models/course')
+var User = require('./models/user')
 
 require('./config/passport')(passport);
 
@@ -132,6 +133,17 @@ app.get('/results/:course_id', function(req, res) {
   })
 })
 
+app.post('/favourite/:course_id', function(req, res) {
+  console.log(req.body)
+  User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
+       if (err) res.send(err)
+       console.log('high')
+       console.log('push fav course', favUser)
+       res.send('/results')
+     })
+})
+
+
 app.get('/update/:course_id', function(req, res){
 Course.findById(req.params.course_id, function(err, course) {
    if (err)
@@ -143,21 +155,32 @@ Course.findById(req.params.course_id, function(err, course) {
  })
  })
 
-app.put('/update/:course_id', function(req,res) {
-  Course.findOneAndUpdate({
-    _id: req.params.course_id
-  }, {$set: {title: req.body.title}},
-  {upsert: true},
-  function(err, newCourse) {
-    if(err) {
-      console.log(err)
-    } else {
-      console.log(newCourse)
-      res.redirect('/viewall')
-    }
-  }
-)
-})
+ app.put('/update/:course_id', function(req,res) {
+   Course.findOneAndUpdate({
+     _id: req.params.course_id
+   }, {$set: {title: req.body.title}},
+   {upsert: true},
+   function(err, newCourse) {
+     if(err) {
+       console.log(err)
+     } else {
+       console.log(newCourse)
+       res.redirect('/viewall')
+     }
+   }
+ )
+ })
+
+app.get('/delete/:course_id', function(req, res){
+Course.findByIdAndRemove(req.params.course_id, function(err, course) {
+   if (err)
+     res.send(err)
+     res.render('delete.ejs', {
+       course: course,
+       course_id: req.params.course_id
+       })
+ })
+ })
 
 function isLoggedIn(req, res, next) {
 

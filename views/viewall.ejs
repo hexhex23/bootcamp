@@ -65,6 +65,10 @@
     <td><form id='show_edit' action =<%= '/update/' + course._id %> method='get'>
           <input type="submit" value="Edit This Record" />
       </form>
+      <p></p>
+      <form id='show_delete' action =<%= '/delete/' + course._id %> method='get'>
+            <input type="submit" value="Delete This Record" />
+        </form>
       </td>
     </tr>
 
