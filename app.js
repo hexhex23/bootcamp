@@ -27,8 +27,7 @@ require('./config/passport')(passport);
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function() {
-  // we're connected!
-  console.log('really really connected')
+  console.log('Connected')
 })
 
 app.use(express.static('public'))
@@ -54,6 +53,51 @@ require('./routes/adminroutes.js')(app, passport)
 mongoose.Promise = global.Promise
 
 var allCourse;
+
+// NON RESTRICTED ROUTES //
+//-- Get and post for homepage; non-restricted access --//
+app.get('/', function(req, res){
+ res.render('index.ejs', {
+ course: ''})
+})
+
+app.post('/', function(req, res){
+  console.log(req.body)
+  Course.find({
+    'subjectarea': req.body.subjectarea,
+    'format': req.body.format,
+    'deliverymode': req.body.deliverymode,
+    'experiencelevel': req.body.experiencelevel
+  }, function(err, course) {
+    if (err) console.log(err)
+    allCourse = course;
+    console.log('allCourse = ' + course)
+    res.redirect('/results')
+    })
+})
+
+//-- Display short-view verion of search results according to parameters; non-restricted access --//
+
+app.get('/results', function(req, res){
+  res.render('results.ejs', {
+    course: allCourse
+    })
+})
+
+//-- Display full-view version of individual search result; non-restricted access --//
+
+app.get('/results/:course_id', function(req, res) {
+  Course.findById(req.params.course_id, function(err, course) {
+    if (err)
+      res.send(err)
+      res.render('individualresults.ejs', {
+        course: course
+        })
+  })
+})
+
+// ADMIN RESTRICTED ROUTES //
+//-- Display full-view version of all records --//
 
 app.get('/viewall', isLoggedIn, function(req, res){
 
@@ -93,53 +137,15 @@ app.post('/addcourse', function(req, res) {
   })
 })
 
-
-app.get('/results', function(req, res){
-  res.render('results.ejs', {
-    course: allCourse
-    })
-})
-
-app.get('/', function(req, res){
- res.render('index.ejs', {
- course: ''})
-})
-
-app.post('/', function(req, res){
-  console.log(req.body)
-  Course.find({
-    'deliverymode': req.body.deliverymode
-  }, function(err, course) {
-    if (err) console.log(err)
-    allCourse = course;
-    console.log('allCourse = ' + course)
-    res.redirect('/results')
-    })
-})
-
-app.get('/results', function(req, res){
-  res.render('results.ejs', {
-    course: allCourse
-    })
-})
-
-app.get('/results/:course_id', function(req, res) {
-  Course.findById(req.params.course_id, function(err, course) {
-    if (err)
-      res.send(err)
-      res.render('individualresults.ejs', {
-        course: course
-        })
-  })
-})
-
 app.post('/favourite/:course_id', function(req, res) {
   console.log(req.body)
   User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
        if (err) res.send(err)
        console.log('high')
        console.log('push fav course', favUser)
-       res.send('/results')
+       res.render('favourite.ejs', {
+         favUser: favUser
+       })
      })
 })
 

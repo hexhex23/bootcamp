@@ -1,3 +1,34 @@
-<h1>Individual Results</h1>
+<h2>Individual Results</h2>
 
-<%=course.sometopics%>
+<a href="/results">< Go Back to Results</a>
+
+<table class='table table-hover table-responsive table-bordered'>
+    <td>Provider Name</td>
+    <td>Course Title</td>
+    <td>Subject Area</td>
+    <td>Delivery Mode</td>
+    <td>Format</td>
+    <td>Length</td>
+    <td>Experience Level</td>
+    <td>Cost</td>
+    <td>Subsidy Availability</td>
+    <td>Subsidies</td>
+    <td>Intakes</td>
+    <td>Some Topics</td>
+
+    <tr>
+    <td><%=course.provider%></td>
+    <td><%=course.title%></td>
+    <td><%=course.subjectarea%></td>
+    <td><%=course.deliverymode%></td>
+    <td><%=course.format%></td>
+    <td><%=course.length%></td>
+    <td><%=course.experiencelevel%></td>
+    <td><%=course.cost%></td>
+    <td><%=course.subsidyavailability%></td>
+    <td><%=course.subsidies%></td>
+    <td><%=course.intakes%></td>
+    <td><%=course.sometopics%></td>
+  </tr>
+
+</table>
