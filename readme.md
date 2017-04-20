@@ -28,7 +28,7 @@ This part of the application uses:
 
 ## Use Cases
 ### Use Cases Diagram
-![Use Cases Image](http://imgur.com/wWXYlgI)
+![Use Cases Image](http://i.imgur.com/wWXYlgI.jpg)
 
 ### Prospect
 The prospective student is able to register, log in, compare bootcamps, favourite bootcamps and express interest(functionality to be implemented).
@@ -37,7 +37,7 @@ The prospective student is able to register, log in, compare bootcamps, favourit
 The bootcamp administrator is able to register, log in, CRUD bootcamps and view an expression of interest from a prospective student(functionality to be implemented).
 
 ## ERD
-![ERD Image](http://imgur.com/z5XC40c)
+![ERD Image](http://i.imgur.com/z5XC40c.jpg)
 
 ### Relationships Explained
 Each course can be favourited many times or none at all thus the use of "zero or many" to represent this relationship. Conversely, a favourite must only be associated with one course.
