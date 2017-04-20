@@ -24,7 +24,6 @@ require('./config/passport')(passport);
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', function() {
-  console.log('Connected')
 })
 
 app.use(express.static('public'))
@@ -57,7 +56,6 @@ app.get('/', function(req, res){
 })
 
 app.post('/', function(req, res){
-  console.log(req.body)
   Course.find({
     'subjectarea': req.body.subjectarea,
     'format': req.body.format,
@@ -65,7 +63,6 @@ app.post('/', function(req, res){
   }, function(err, course) {
     if (err) console.log(err)
     allCourse = course;
-    console.log('allCourse = ' + course)
     res.redirect('/results')
     })
 })
@@ -98,7 +95,6 @@ app.get('/viewall', isLoggedInAdmin, function(req, res){
   Course.find({}, function(err, course){
     if (err) console.log(err);
     allCourse = course;
-    console.log('allCourse = ' + course)
     res.render('viewall.ejs', {
       course: allCourse
       })
@@ -113,7 +109,6 @@ app.get('/addcourse', isLoggedInAdmin, function(req, res){
   Course.find({}, function(err, course){
     if (err) console.log(err);
     allCourse = course;
-    console.log('allCourse = ' + course)
     res.render('new.ejs', {
       course: allCourse
       })
@@ -123,7 +118,6 @@ app.get('/addcourse', isLoggedInAdmin, function(req, res){
 //-- Post new course created by admin; admin restricted access --//
 
 app.post('/addcourse', isLoggedInAdmin, function(req, res) {
-  console.log(req.body)
   Course.create(req.body, function (err, course) {
   if (err) console.log(err);
   console.log(course.title + ' created')
@@ -208,11 +202,8 @@ Course.findById(req.params.course_id, function(err, course) {
 // USER RESTRICTED ROUTES //
 //-- Favourite a single course; user restricted access --//
 app.post('/favourite/:course_id', isLoggedIn, function(req, res) {
-  console.log(req.body)
   User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
        if (err) res.send(err)
-       console.log('high')
-       console.log('push fav course', favUser)
        res.redirect('/favourite')
      })
 })
@@ -231,7 +222,6 @@ app.get('/favourite', isLoggedIn, function(req, res) {
 //-- Delete favourited courses; user restricted access --//
 app.delete('/favouritedelete/:id', isLoggedIn, function(req,res) {
   User.update( {_id: req.user._id}, { $pullAll: {favourites: [req.params.id] } } , function (err, data) {
-    console.log('deleted', data)
     if (err) console.log(err)
     res.redirect('/favourite')
   })

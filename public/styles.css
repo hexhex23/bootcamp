@@ -12,3 +12,7 @@ body {
     vertical-align: middle;
     font-family: 'Inconsolata', monospace;
 }
+
+#modal {
+  max-width: 40%;
+}
