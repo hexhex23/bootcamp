@@ -63,7 +63,7 @@
 <td><%=course.format%></td>
 <td><%=course.length%></td>
 <td><%=course.experiencelevel%></td>
-<td><%=course.cost%></td>
+<td><%=course.price%></td>
 <td><%=course.subsidyavailability%></td>
 <td><%=course.subsidies%></td>
 <td><%=course.intakes%></td>
@@ -86,17 +86,18 @@
 
       <tr>
           <td>Provider Name</td>
-          <td><input type='text' name='provider' placeholder='Provider Name' class='form-control'></td>
+          <td><input type='text' name='provider' value="<%=course.provider%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Course Title</td>
-          <td><input type='text' name='title' placeholder='Course Title' class='form-control'></td>
+          <td><input type='text' name='title' value="<%=course.title%>" class='form-control' required></td>
       </tr>
 
       <tr>
           <td>Subject Area</td>
           <td><select name='subjectarea' class='form-control'>
+            <option value="<%=course.subjectarea%>" selected="selected"><%=course.subjectarea%></option>
             <option value='Data Science'>Data Science</option>
             <option value='Digital Marketing'>Digital Marketing</option>
             <option value='Mobile App Development'>Mobile App Development</option>
@@ -109,6 +110,7 @@
       <tr>
           <td>Delivery Mode</td>
           <td><select name='deliverymode' class='form-control'>
+            <option value="<%=course.deliverymode%>" selected="selected"><%=course.deliverymode%></option>
             <option value='Offline'>Offline</option>
             <option value='Online'>Online</option>
         </select>
@@ -118,6 +120,7 @@
       <tr>
           <td>Format</td>
           <td><select name='format' class='form-control'>
+            <option value="<%=course.format%>" selected="selected"><%=course.format%></option>
             <option value='Full-time'>Full-time</option>
             <option value='Part-time'>Part-time</option>
         </select>
@@ -126,12 +129,13 @@
 
       <tr>
           <td>Length</td>
-          <td><input type='text' name='length' placeholder='Length of Course in Weeks' class='form-control'></td>
+          <td><input type='text' name='length' value="<%=course.length%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Experience Level</td>
           <td><select name='experiencelevel' class='form-control'>
+            <option value="<%=course.experiencelevel%>" selected="selected"><%=course.experiencelevel%></option>
             <option value='Beginner'>Beginner</option>
             <option value='Intermediate (pre-requisites required)'>Intermediate (pre-requisites required)</option>
             <option value='Advanced (pre-requisites required)'>Advanced (pre-requisites required)</option>
@@ -141,12 +145,13 @@
 
       <tr>
           <td>Cost</td>
-          <td><input type='text' name='price' placeholder='Cost of Course' class='form-control'></td>
+          <td><input type='text' name='price' value="<%=course.price%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Subsidy Availability</td>
           <td><select name='subsidyavailability' class='form-control'>
+            <option value="<%=course.subsidyavailability%>" selected="selected"><%=course.subsidyavailability%></option>
             <option value='Yes'>Yes</option>
             <option value='No'>No</option>
         </select>
@@ -155,32 +160,32 @@
 
       <tr>
           <td>Subsidies</td>
-          <td><input type='text' name='subsidies' placeholder='Subsidies' class='form-control'></td>
+          <td><input type='text' name='subsidies' value="<%=course.subsidies%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Intakes</td>
-          <td><input type='text' name='intakes' placeholder='Intakes' class='form-control'></td>
+          <td><input type='text' name='intakes' value="<%=course.intakes%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Some Topics</td>
-          <td><input type='text' name='sometopics' placeholder='Topics Covered' class='form-control'></td>
+          <td><input type='text' name='sometopics' value="<%=course.sometopics%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Great For</td>
-          <td><input type='text' name='great' placeholder='Great For' class='form-control'></td>
+          <td><input type='text' name='great' value="<%=course.great%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Be Aware</td>
-          <td><input type='text' name='aware' placeholder='Be Aware' class='form-control'></td>
+          <td><input type='text' name='aware' value="<%=course.aware%>" class='form-control'></td>
       </tr>
 
       <tr>
           <td>Website</td>
-          <td><input type='text' name='website' placeholder='Website' class='form-control'></td>
+          <td><input type='text' name='website' value="<%=course.website%>" class='form-control'></td>
       </tr>
 
       <tr>

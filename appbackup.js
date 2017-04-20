@@ -4,7 +4,9 @@ var bodyParser = require('body-parser')
 var expressLayouts = require('express-ejs-layouts')
 var methodOverride = require('method-override')
 var path = require('path')
+var debug = require("debug")
 var logger = require('morgan')
+var helpers = require('express-helpers')
 var app = express()
 var router = express.Router()
 var port = process.env.PORT || 4000
@@ -35,6 +37,7 @@ app.use(expressLayouts)
 app.engine('ejs', require('ejs').renderFile)
 app.set('view engine', 'ejs')
 app.use(methodOverride('_method'))
+helpers(app)
 
 //required for passport
 app.use(session({ secret: 'michaelfassbender' }))
@@ -160,7 +163,7 @@ Course.findById(req.params.course_id, function(err, course) {
      format: req.body.format,
      length: req.body.length,
      experiencelevel: req.body.experiencelevel,
-     price: req.body.price,
+     cost: req.body.cost,
      subsidyavailability: req.body.subsidyavailability,
      subsidies: req.body.subsidies,
      intakes: req.body.intakes,
