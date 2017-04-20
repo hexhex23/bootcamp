@@ -99,7 +99,7 @@ app.get('/results/:course_id', function(req, res) {
 // ADMIN RESTRICTED ROUTES //
 //-- Display full-view version of all records; admin restricted access --//
 
-app.get('/viewall', isLoggedIn, function(req, res){
+app.get('/viewall', isLoggedInAdmin, function(req, res){
 
   Course.find({}, function(err, course){
     if (err) console.log(err);
@@ -114,7 +114,7 @@ app.get('/viewall', isLoggedIn, function(req, res){
 
 //-- Display create new record page; admin restricted access --//
 
-app.get('/addcourse', isLoggedIn, function(req, res){
+app.get('/addcourse', isLoggedInAdmin, function(req, res){
 
   Course.find({}, function(err, course){
     if (err) console.log(err);
@@ -195,7 +195,8 @@ Course.findById(req.params.course_id, function(err, course) {
      })
 
 
-app.post('/favourite/:course_id', function(req, res) {
+// USER RESTRICTED ROUTES //
+app.post('/favourite/:course_id', isLoggedIn, function(req, res) {
   console.log(req.body)
   User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
        if (err) res.send(err)
@@ -208,11 +209,18 @@ app.post('/favourite/:course_id', function(req, res) {
 })
 
 
-function isLoggedIn(req, res, next) {
+function isLoggedInAdmin(req, res, next) {
 
     if (req.isAuthenticated())
         return next()
     res.redirect('/admin/adauthhome')}
+
+function isLoggedIn(req, res, next) {
+
+        if (req.isAuthenticated())
+            return next()
+        res.redirect('/loginhomepage')
+    }
 
 app.listen(port, function () {
   console.log('app is running at ' + port)

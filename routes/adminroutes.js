@@ -25,7 +25,7 @@ module.exports = function(app, passport) {
           failureFlash : true
       }))
 
-    app.get('/admin/adprofile', isLoggedIn, function(req, res) {
+    app.get('/admin/adprofile', isLoggedInAdmin, function(req, res) {
         res.render('adprofile.ejs', {
             user : req.user
         })
@@ -37,7 +37,7 @@ module.exports = function(app, passport) {
     })
 }
 
-function isLoggedIn(req, res, next) {
+function isLoggedInAdmin(req, res, next) {
 
     if (req.isAuthenticated())
         return next()
