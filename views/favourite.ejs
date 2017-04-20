@@ -9,6 +9,7 @@
                 <p>
                     <strong>id</strong>: <%= user._id %><br>
                     <strong>email</strong>: <%= user.local.email %><br>
+                    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
                 </p>
 
         </div>
@@ -31,6 +32,9 @@
     <td>Subsidies</td>
     <td>Intakes</td>
     <td>Some Topics</td>
+    <td>Great For</td>
+    <td>Be Aware</td>
+    <td>Website</td>
     <td></td>
 
     <% favourites.forEach(function(favourites, index){ %>
@@ -49,6 +53,9 @@
     <td><%=favourites.subsidies%></td>
     <td><%=favourites.intakes%></td>
     <td><%=favourites.sometopics%></td>
+    <td><%=course.great%></td>
+    <td><%=course.aware%></td>
+    <td><%=course.website%></td>
     <td>
 
     <form id='show_delete' action =<%= '/favouritedelete/' + favourites._id + '/?_method=DELETE' %> method='post'>

@@ -64,8 +64,7 @@ app.post('/', function(req, res){
   Course.find({
     'subjectarea': req.body.subjectarea,
     'format': req.body.format,
-    'deliverymode': req.body.deliverymode,
-    'experiencelevel': req.body.experiencelevel
+    'deliverymode': req.body.deliverymode
   }, function(err, course) {
     if (err) console.log(err)
     allCourse = course;

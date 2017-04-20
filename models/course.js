@@ -12,6 +12,9 @@ var courseSchema = new mongoose.Schema({
    subsidies: String,
    intakes: String,
    sometopics: String,
+   great: String,
+   aware: String,
+   website: String
 })
 
 var Course = mongoose.model('Course', courseSchema)

@@ -13,11 +13,9 @@
               <input type="submit" value="More Details" />
           </form>
 
-          <button type="submit" name='favourite' value=<%- course.id %> formaction =' /favourite/<%= course._id %>' formmethod='post'>Favourite Course</button>
-
-          // <form id='show_addfavourites' action =' /favourite/<%= course._id %>' method='post'>
-          //       <input type="submit" name='favourite' value=<%- course.id %> />
-          //   </form>
+          <form id='show_addfavourites' action =' /favourite/<%= course._id %>' method='post'>
+                <button type="submit" name='favourite' value=<%- course.id %>>Favourite </button>
+            </form>
             </td>
       </tr>
       <tr>
@@ -26,8 +24,8 @@
           <td>Experience Level: <br /><%=course.experiencelevel%></td>
       </tr>
   <tr>
-    <td colspan="2">Great for:</td>
-    <td colspan="3">Be aware:</td>
+    <td colspan="2">Great for: <br /><%=course.great%></td>
+    <td colspan="3">Be aware: <br /><%=course.aware%></td>
   </tr>
   </table>
 
