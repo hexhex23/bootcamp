@@ -23,6 +23,9 @@
             <li>
                 <a href="/admin/adprofile">Profile</a>
             </li>
+            <li>
+                <a href="/admin/logout">Logout</a>
+            </li>
         </ul>
     </div><!--/.nav-collapse -->
 
@@ -30,12 +33,7 @@
 </div>
 <%# End navigation bar%>
 
-  <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-
-<div class="page-header text-center">
-    <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-</div>
-
+<%# Show course that has been selected by admin from view all page%>
 <h3>This is the course you are updating:</h3>
 <table class='table table-hover table-responsive table-bordered'>
     <td>Provider Name</td>
@@ -73,6 +71,7 @@
 </div>
   </table>
 
+<%# Update form starts%>
 <%# Bootstrap table start%>
 <h3>Update the fields you would like to change.</h3>
   <table class='table table-hover table-responsive table-bordered'>

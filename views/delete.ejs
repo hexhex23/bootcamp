@@ -1,1 +1,87 @@
-<h1>Record has been deleted!</h1>
+<h2>Delete a Course</h2>
+
+<%# start header navigation bar%>
+<div class='page-wrapper'>
+  <div class="navbar navbar-default navbar-static-top" role="navigation">
+<div class="container">
+
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/viewall" title='Merlion Learns'>View All Courses</a>
+    </div>
+
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="/addcourse">Add Course</a>
+            </li>
+            <li>
+                <a href="/admin/adprofile">Profile</a>
+            </li>
+            <li>
+                <a href="/admin/logout">Logout</a>
+            </li>
+        </ul>
+    </div><!--/.nav-collapse -->
+
+</div>
+</div>
+<%# End navigation bar%>
+
+<%# Show course that has been selected by admin from view all page%>
+<h3>This is the course you are deleting:</h3>
+<table class='table table-hover table-responsive table-bordered'>
+  <form id='delete_course' action =<%= '/delete/' + course_id + '/?_method=PUT' %> method='post'>
+    <input type="hidden" name="_method" value="delete"/>
+
+    <td>Provider Name</td>
+    <td>Course Title</td>
+    <td>Subject Area</td>
+    <td>Delivery Mode</td>
+    <td>Format</td>
+    <td>Length</td>
+    <td>Experience Level</td>
+    <td>Cost</td>
+    <td>Subsidy Availability</td>
+    <td>Subsidies</td>
+    <td>Intakes</td>
+    <td>Some Topics</td>
+
+
+<div class='course-container'>
+  <p>
+<tr>
+<td><%=course.provider%></td>
+<td><%=course.title%></td>
+<td><%=course.subjectarea%></td>
+<td><%=course.deliverymode%></td>
+<td><%=course.format%></td>
+<td><%=course.length%></td>
+<td><%=course.experiencelevel%></td>
+<td><%=course.cost%></td>
+<td><%=course.subsidyavailability%></td>
+<td><%=course.subsidies%></td>
+<td><%=course.intakes%></td>
+<td><%=course.sometopics%></td>
+</tr>
+
+</p>
+</div>
+
+<tr>
+       <td></td>
+       <td>
+         <button type="submit" class="btn btn-primary">
+            <span class="glyphicon"></span>Confirm Delete Full Record
+        </button>
+       </td>
+   </tr>
+
+
+</form>
+  </table>

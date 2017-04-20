@@ -97,7 +97,7 @@ app.get('/results/:course_id', function(req, res) {
 })
 
 // ADMIN RESTRICTED ROUTES //
-//-- Display full-view version of all records --//
+//-- Display full-view version of all records; admin restricted access --//
 
 app.get('/viewall', isLoggedIn, function(req, res){
 
@@ -112,6 +112,8 @@ app.get('/viewall', isLoggedIn, function(req, res){
 })
 
 
+//-- Display create new record page; admin restricted access --//
+
 app.get('/addcourse', isLoggedIn, function(req, res){
 
   Course.find({}, function(err, course){
@@ -124,9 +126,10 @@ app.get('/addcourse', isLoggedIn, function(req, res){
     })
 })
 
+//-- Post new course created by admin; admin restricted access --//
+
 app.post('/addcourse', function(req, res) {
   console.log(req.body)
-
   Course.create(req.body, function (err, course) {
   if (err) console.log(err);
   console.log(course.title + ' created')
@@ -137,18 +140,7 @@ app.post('/addcourse', function(req, res) {
   })
 })
 
-app.post('/favourite/:course_id', function(req, res) {
-  console.log(req.body)
-  User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
-       if (err) res.send(err)
-       console.log('high')
-       console.log('push fav course', favUser)
-       res.render('favourite.ejs', {
-         favUser: favUser
-       })
-     })
-})
-
+//-- Display record choosen for editting by admin; admin restricted access --//
 
 app.get('/update/:course_id', function(req, res){
 Course.findById(req.params.course_id, function(err, course) {
@@ -160,6 +152,8 @@ Course.findById(req.params.course_id, function(err, course) {
        })
  })
  })
+
+ //-- Find one course and update; admin restricted access --//
 
  app.put('/update/:course_id', function(req,res) {
    Course.findOneAndUpdate({
@@ -177,16 +171,42 @@ Course.findById(req.params.course_id, function(err, course) {
  )
  })
 
-app.get('/delete/:course_id', function(req, res){
-Course.findByIdAndRemove(req.params.course_id, function(err, course) {
-   if (err)
-     res.send(err)
-     res.render('delete.ejs', {
-       course: course,
-       course_id: req.params.course_id
+ //-- Display record choosen for deleting by admin; admin restricted access --//
+
+ app.get('/delete/:course_id', function(req, res){
+ Course.findById(req.params.course_id, function(err, course) {
+    if (err)
+      res.send(err)
+      res.render('delete.ejs', {
+        course: course,
+        course_id: req.params.course_id
+        })
+  })
+  })
+
+  //-- Find one course and delete; admin restricted access --//
+
+  app.put('/delete/:course_id', function(req,res) {
+    Course.findByIdAndRemove(req.params.course_id, function(err, course) {
+       if (err)
+         res.send(err)
+         res.redirect('/viewall')
+     })
+     })
+
+
+app.post('/favourite/:course_id', function(req, res) {
+  console.log(req.body)
+  User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
+       if (err) res.send(err)
+       console.log('high')
+       console.log('push fav course', favUser)
+       res.render('favourite.ejs', {
+         favUser: favUser
        })
- })
- })
+     })
+})
+
 
 function isLoggedIn(req, res, next) {
 

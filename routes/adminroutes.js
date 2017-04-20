@@ -27,7 +27,7 @@ module.exports = function(app, passport) {
 
     app.get('/admin/adprofile', isLoggedIn, function(req, res) {
         res.render('adprofile.ejs', {
-            user : req.admin
+            user : req.user
         })
     })
 
