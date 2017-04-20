@@ -155,7 +155,23 @@ Course.findById(req.params.course_id, function(err, course) {
  app.put('/update/:course_id', function(req,res) {
    Course.findOneAndUpdate({
      _id: req.params.course_id
-   }, {$set: {title: req.body.title}},
+   }, {$set: {
+     provider: req.body.provider,
+     title: req.body.title,
+     subjectarea: req.body.subjectarea,
+     deliverymode: req.body.deliverymode,
+     format: req.body.format,
+     length: req.body.length,
+     experiencelevel: req.body.experiencelevel,
+     cost: req.body.cost,
+     subsidyavailability: req.body.subsidyavailability,
+     subsidies: req.body.subsidies,
+     intakes: req.body.intakes,
+     sometopics: req.body.sometopics,
+     great: req.body.great,
+     aware: req.body.aware,
+     website: req.body.website
+    }},
    {upsert: true},
    function(err, newCourse) {
      if(err) {
