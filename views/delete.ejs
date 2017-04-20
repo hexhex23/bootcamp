@@ -36,7 +36,7 @@
 <%# Show course that has been selected by admin from view all page%>
 <h3>This is the course you are deleting:</h3>
 <table class='table table-hover table-responsive table-bordered'>
-  <form id='delete_course' action =<%= '/delete/' + course_id + '/?_method=PUT' %> method='post'>
+  <form id='delete_course' action =<%= '/delete/' + course_id + '/?_method=DELETE' %> method='post'>
     <input type="hidden" name="_method" value="delete"/>
 
     <td>Provider Name</td>

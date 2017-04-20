@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
     })
 
     app.post('/login', passport.authenticate('local-login', {
-          successRedirect : '/profile',
+          successRedirect : '/favourite',
           failureRedirect : '/login',
           failureFlash : true
       }))
@@ -20,16 +20,10 @@ module.exports = function(app, passport) {
     })
 
       app.post('/signup', passport.authenticate('local-signup', {
-          successRedirect : '/profile',
+          successRedirect : '/favourite',
           failureRedirect : '/signup',
           failureFlash : true
       }))
-
-    app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
-            user : req.user
-        })
-    })
 
     app.get('/logout', function(req, res) {
         req.logout();

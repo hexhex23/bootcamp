@@ -184,7 +184,7 @@ Course.findById(req.params.course_id, function(err, course) {
 
   //-- Find one course and delete; admin restricted access --//
 
-  app.put('/delete/:course_id', function(req,res) {
+  app.delete('/delete/:course_id', function(req,res) {
     Course.findByIdAndRemove(req.params.course_id, function(err, course) {
        if (err)
          res.send(err)
@@ -210,12 +210,20 @@ app.get('/favourite', isLoggedIn, function(req, res) {
   User.findById(req.user.id).populate('favourites').exec(function (err, favourites){
     if (err) console.log(err)
     res.render('favourite.ejs', {
-      favourites: favourites.favourites
+      favourites: favourites.favourites,
+      user : req.user
     })
   })
 })
 
-
+//-- Delete favourited courses; user restricted access --//
+app.delete('/favouritedelete/:id', function(req,res) {
+  User.update( {_id: req.user._id}, { $pullAll: {favourites: [req.params.id] } } , function (err, data) {
+    console.log('deleted', data)
+    if (err) console.log(err)
+    res.redirect('/favourite')
+  })
+   })
 
 function isLoggedInAdmin(req, res, next) {
 
