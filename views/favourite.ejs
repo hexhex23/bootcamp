@@ -1,3 +1,40 @@
 <h1>Say Hello</h1>
 
-<%- favUser.favourites %>
+<table class='table table-hover table-responsive table-bordered'>
+    <td>Provider Name</td>
+    <td>Course Title</td>
+    <td>Subject Area</td>
+    <td>Delivery Mode</td>
+    <td>Format</td>
+    <td>Length</td>
+    <td>Experience Level</td>
+    <td>Cost</td>
+    <td>Subsidy Availability</td>
+    <td>Subsidies</td>
+    <td>Intakes</td>
+    <td>Some Topics</td>
+
+    <% favourites.forEach(function(favourites, index){ %>
+      <div class='favourites-container'>
+        <p>
+    <tr>
+    <td><%=favourites.provider%></td>
+    <td><%=favourites.title%></td>
+    <td><%=favourites.subjectarea%></td>
+    <td><%=favourites.deliverymode%></td>
+    <td><%=favourites.format%></td>
+    <td><%=favourites.length%></td>
+    <td><%=favourites.experiencelevel%></td>
+    <td><%=favourites.cost%></td>
+    <td><%=favourites.subsidyavailability%></td>
+    <td><%=favourites.subsidies%></td>
+    <td><%=favourites.intakes%></td>
+    <td><%=favourites.sometopics%></td>
+    </tr>
+
+    </p>
+    </div>
+
+    <% }) %>
+
+      </table>

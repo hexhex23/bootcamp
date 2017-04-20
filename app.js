@@ -13,7 +13,6 @@ var port = process.env.PORT || 4000
 var MongoClient = require('mongodb').MongoClient
 var passport = require('passport')
 var flash = require('connect-flash')
-var cookieParser = require('cookie-parser')
 var session = require('express-session')
 
 var dbURI = process.env.PROD_MONGODB || 'mongodb://localhost:27017/bootcampsearch'
@@ -38,7 +37,6 @@ app.use(expressLayouts)
 app.engine('ejs', require('ejs').renderFile)
 app.set('view engine', 'ejs')
 app.use(methodOverride('_method'))
-app.use(cookieParser())
 helpers(app)
 
 //required for passport
@@ -196,17 +194,27 @@ Course.findById(req.params.course_id, function(err, course) {
 
 
 // USER RESTRICTED ROUTES //
+//-- Favourite a single course; user restricted access --//
 app.post('/favourite/:course_id', isLoggedIn, function(req, res) {
   console.log(req.body)
   User.findByIdAndUpdate(req.user.id, {$push: {favourites: req.body.favourite}}, {new: true},function (err, favUser) {
        if (err) res.send(err)
        console.log('high')
        console.log('push fav course', favUser)
-       res.render('favourite.ejs', {
-         favUser: favUser
-       })
+       res.redirect('/favourite')
      })
 })
+
+//-- Show all favourited courses; user restricted access --//
+app.get('/favourite', isLoggedIn, function(req, res) {
+  User.findById(req.user.id).populate('favourites').exec(function (err, favourites){
+    if (err) console.log(err)
+    res.render('favourite.ejs', {
+      favourites: favourites.favourites
+    })
+  })
+})
+
 
 
 function isLoggedInAdmin(req, res, next) {

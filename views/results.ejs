@@ -12,9 +12,12 @@
         <td rowspan="2"><form id='show_individualresults' action =<%= '/results/' + course._id %> method='get'>
               <input type="submit" value="More Details" />
           </form>
-          <form id='show_addfavourites' action =' /favourite/<%= course._id %>' method='post'>
-                <input type="submit" name='favourite' value=<%- course.id %> />
-            </form>
+
+          <button type="submit" name='favourite' value=<%- course.id %> formaction =' /favourite/<%= course._id %>' formmethod='post'>Favourite Course</button>
+
+          // <form id='show_addfavourites' action =' /favourite/<%= course._id %>' method='post'>
+          //       <input type="submit" name='favourite' value=<%- course.id %> />
+          //   </form>
             </td>
       </tr>
       <tr>
